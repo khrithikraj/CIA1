@@ -1,4 +1,6 @@
-Since all 3 are unable to handle a directed, negative weighted graph.The Prims and Kruskals algorithm wont work for undirected graph.
+Since all 3 are unable to handle a directed, negative weighted graph.The Prims and Kruskals algorithm wont work for undirected graph.Dijkstra algorithm cant be used gor directed graph.
+
+I used C programming language beacuse i am working with that from past 3 semesters and i had learnt data structers in C too.
 
 
 The Bellman–Ford algorithm is an algorithm that computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph.
