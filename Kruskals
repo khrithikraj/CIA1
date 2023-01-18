@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_VERTICES 100
+#define MAX_EDGES 500
+
+int parent[MAX_VERTICES];
+
+struct Edge {
+    int source, destination, weight;
+} edges[MAX_EDGES];
+
+int find(int x) {
+    if (parent[x] == x)
+        return x;
+    return parent[x] = find(parent[x]);
+}
+
+int compare(const void* a, const void* b) {
+    struct Edge* a1 = (struct Edge*)a;
+    struct Edge* b1 = (struct Edge*)b;
+    return a1->weight - b1->weight;
+}
+
+void kruskals(int n, int m) {
+    int i, x, y, cost = 0;
+
+    for (i = 0; i < n; i++)
+        parent[i] = i;
+
+    qsort(edges, m, sizeof(struct Edge), compare);
+
+    for (i = 0; i < m; i++) {
+        x = find(edges[i].source);
+        y = find(edges[i].destination);
+
+        if (x != y) {
+            printf("%d %d %d\n", edges[i].source, edges[i].destination, edges[i].weight);
+            parent[x] = y;
+            cost += edges[i].weight;
+        }
+    }
+
+    printf("Cost: %d\n", cost);
+}
+
+int main() {
+    int n, m, i;
+
+   
+    scanf("%d %d", &n, &m);
+
+    for (i = 0; i < m; i++)
+        scanf("%d %d %d", &edges[i].source, &edges[i].destination, &edges[i].weight);
+
+    kruskals(n, m);
+
+    return 0;
+}
